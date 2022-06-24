@@ -1,0 +1,2 @@
+# IMPORTANT: Use {player-name} instead of %player_name%!
+CHAT-FORMAT: '{channelName} %vault_rank% &7| &3{player-name} &8> &f{message}'

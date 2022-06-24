@@ -1,0 +1,9 @@
+name: ChatSystem
+version: '${project.version}'
+main: com.realxode.chatsystem.ChatSystem
+api-version: 1.18
+authors: [ RealXode ]
+softdepend:
+  - PlaceholderAPI
+commands:
+  channel:
