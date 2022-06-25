@@ -35,7 +35,11 @@ public class ChannelCommand implements CommandExecutor {
             return true;
         }
         String name = args[0];
-        ChatChannelManager channelManager = new ChatChannelManager();
+        ChatChannelManager channelManager = plugin.getChannelManager();
+        if (channelManager.isInChannel(player)) {
+            player.sendMessage("&cYou are already in a channel!");
+            return true;
+        }
         channelManager.createChannel(name, player);
         return false;
     }

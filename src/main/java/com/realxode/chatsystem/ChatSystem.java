@@ -1,6 +1,7 @@
 package com.realxode.chatsystem;
 
 import com.realxode.api.file.FileConfig;
+import com.realxode.chatsystem.channel.ChatChannelManager;
 import com.realxode.chatsystem.channel.cmds.ChannelCommand;
 import com.realxode.chatsystem.events.ChatListener;
 import org.bukkit.Bukkit;
@@ -10,11 +11,14 @@ public final class ChatSystem extends JavaPlugin {
 
     private final FileConfig chatConfig = new FileConfig(this, "chatCfg.yml");
 
+    private ChatChannelManager channelManager;
+
     @Override
     public void onEnable() {
         if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             throw new RuntimeException("Could not find PlaceholderAPI!! Plugin can not work without it!");
         }
+        channelManager = new ChatChannelManager();
         Bukkit.getPluginManager().registerEvents(new ChatListener(this), this);
         getCommand("channel").setExecutor(new ChannelCommand(this));
 
@@ -27,5 +31,9 @@ public final class ChatSystem extends JavaPlugin {
 
     public FileConfig getChatConfig() {
         return chatConfig;
+    }
+
+    public ChatChannelManager getChannelManager() {
+        return channelManager;
     }
 }

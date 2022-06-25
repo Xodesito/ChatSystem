@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.realxode.api.chat.ChatUtil.translate;
 
@@ -38,15 +37,9 @@ public class ChatChannelManager {
     }
 
     public String getChannelNameByPlayer(Player player) {
-        for (ChatChannel channel : channels.values()) {
-            if (channel.getPlayerList().contains(player.getUniqueId())) {
-                AtomicReference<String> name = null;
-                channels.forEach((key, value) -> {
-                    if (value.equals(channel)) {
-                        name.set(key);
-                    }
-                });
-                return name.get();
+        for (Map.Entry<String, ChatChannel> entry : channels.entrySet()) {
+            if (entry.getValue().getPlayerList().contains(player.getUniqueId())) {
+                return entry.getKey();
             }
         }
         return null;
